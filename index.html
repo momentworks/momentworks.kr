@@ -174,7 +174,8 @@
   .line-group-label span.sub{font-size:13px;color:var(--muted);font-weight:400;}
 
   /* ===== PRICING CARDS ===== */
-  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-bottom:64px;}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:64px;}
+  @media(max-width:1000px){.cards{grid-template-columns:repeat(2,1fr);}}
   @media(max-width:720px){.cards{grid-template-columns:1fr;}}
   .card{
     background:#fff;border:1px solid #E3DDCF;border-radius:4px;padding:32px 30px 30px;
@@ -596,7 +597,7 @@
         <div class="stop">
           <span class="time">STEP 1</span>
           <div class="label">사전 세팅</div>
-          <div class="desc">예식 1시간 30분 전 도착, 방명록·봉투·안내 데스크를 세팅합니다.</div>
+          <div class="desc">예식 70분 전 도착, 방명록·봉투·안내 데스크를 미리 세팅합니다.</div>
         </div>
         <div class="stop">
           <span class="time">STEP 2</span>
@@ -612,12 +613,12 @@
         <div class="stop">
           <span class="time">STEP 4</span>
           <div class="label">정산 &amp; 마감</div>
-          <div class="desc">식권·주차권까지 포함해 정산 내역서를 작성합니다.</div>
+          <div class="desc">모먼트웍스 전용 양식을 사용하여 식권까지 포함해 정산 내역서를 작성합니다.</div>
         </div>
         <div class="stop">
           <span class="time">STEP 5</span>
           <div class="label">직접 인계</div>
-          <div class="desc">봉투와 정산 내역서를 신랑신부 측에 직접 전달합니다.</div>
+          <div class="desc">봉투와 정산 내역서를 지정해주신 분께 안전하게 직접 전달합니다.</div>
         </div>
       </div>
     </div>
@@ -650,7 +651,7 @@
           </div>
           <div class="price-note" style="margin-top:6px;">수도권 기준 · 3시간 내외 · 하객 250명 기준 · 7/31까지 예약 시</div>
           <ul>
-            <li>단정한 정장 차림의 대표 부부 2인 응대</li>
+            <li>단정한 차림의 대표 부부 2인 응대</li>
             <li>방명록 · 봉투 이중 관리</li>
             <li>정산 내역서 전달</li>
             <li>실시간 촬영 · 영상 링크 공유 (한 측당 카메라 1대 제공 · 추가 거치 시 별도 문의)</li>
@@ -674,6 +675,27 @@
             <li>2인 1조 × 2팀(총 4인) 동시 응대</li>
             <li>신랑측 · 신부측 각각 방명록 · 봉투 관리</li>
             <li>양측 진행 시 5만원 추가 할인</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="event-tag">OPEN EVENT -30%</span>
+          <div class="kicker">Combined</div>
+          <h4>신랑 · 신부 통합 패키지</h4>
+          <div class="desc">신랑측과 신부측 축의대를 한 곳으로 통합해 응대하는 구성입니다. 2인 1조 기본 응대로 진행됩니다.</div>
+          <div class="price-row num">
+            <span class="price-was">450,000원</span>
+            <span class="price-now">315,000<span class="won">원</span></span>
+          </div>
+          <div class="price-note" style="margin-top:6px;">수도권 기준 · 3시간 내외 · 하객 150명 기준 · 7/31까지 예약 시</div>
+          <ul>
+            <li>단정한 차림의 대표 부부 2인 응대</li>
+            <li>신랑측 · 신부측 통합 방명록 · 봉투 관리</li>
+            <li>정산 내역서 전달</li>
+            <li>실시간 촬영 · 영상 링크 공유 (카메라 1대 제공 · 추가 거치 시 별도 문의)</li>
+            <li>엑셀 자동 정산표 제공</li>
+            <li>하객 안내문 제작 및 비치</li>
+            <li>축의금 인계확인서 제공</li>
+            <li>화환 사진 촬영 및 전달</li>
           </ul>
         </div>
       </div>
@@ -750,33 +772,10 @@
 
   <!-- TRUST -->
   <section class="trust">
-    <div class="wrap">
+    <div class="wrap" style="grid-template-columns:1fr;text-align:center;justify-items:center;">
       <div>
         <span class="tag">Why Moment Works</span>
         <h3>축의금은 기록으로,<br>진행은 완성도로 남습니다.</h3>
-      </div>
-      <div class="trust-list">
-        <div class="item">
-          <span class="idx">01</span>
-          <div>
-            <div class="t">전 과정 영상 기록</div>
-            <div class="d">접수부터 전달까지, 분실이나 오해가 생길 여지를 남기지 않습니다.</div>
-          </div>
-        </div>
-        <div class="item">
-          <span class="idx">02</span>
-          <div>
-            <div class="t">전문 사회자 연계</div>
-            <div class="d">축의대와 사회자를 함께 예약하면 식순 미팅부터 한 팀이 조율합니다.</div>
-          </div>
-        </div>
-        <div class="item">
-          <span class="idx">03</span>
-          <div>
-            <div class="t">투명한 정산</div>
-            <div class="d">신랑측 · 신부측 구분 정산과 내역서로 사후 문의에도 명확하게 답합니다.</div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -889,6 +888,7 @@
           <select id="cf-product">
             <option value="축의대 스탠다드">축의대 스탠다드</option>
             <option value="축의대 스탠다드 (양측)">축의대 스탠다드 (양측)</option>
+            <option value="신랑 · 신부 통합 패키지">신랑 · 신부 통합 패키지</option>
             <option value="기타 문의">기타 문의</option>
           </select>
         </div>
