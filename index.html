@@ -96,7 +96,17 @@
     background:var(--wine);color:#fff;padding:4px 10px;border-radius:20px;
   }
   .card.premium .event-tag{background:var(--gold);color:var(--ink);}
+  .price-tag{
+    display:inline-flex;align-items:center;gap:4px;
+    font-size:11.5px;font-weight:700;color:var(--wine);
+    background:rgba(139,26,44,0.08);border:1px solid rgba(139,26,44,0.18);
+    padding:4px 11px;border-radius:20px;letter-spacing:0.01em;margin-bottom:10px;
+  }
   .price-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+  .price-steps{font-size:12.5px;color:var(--muted);margin:0 0 10px;line-height:1.7;}
+  .price-steps .arrow{color:#B4AEA0;margin:0 3px;}
+  .price-steps .cut{text-decoration:line-through;color:#B4AEA0;}
+  .price-steps strong{color:var(--wine);font-weight:700;text-decoration:none;}
   .price-was{font-size:16px;color:#B4AEA0;text-decoration:line-through;font-weight:500;}
   .price-now{font-size:30px;font-weight:700;color:var(--wine);}
   .price-now .won{font-size:16px;font-weight:500;margin-left:2px;}
@@ -133,6 +143,18 @@
     background:rgba(217,189,140,0.08);
   }
   .btn-ghost:hover{background:var(--gold-light);color:var(--ink);}
+  .btn-wine{
+    border:1.5px solid var(--wine-light);color:var(--wine-light);font-weight:600;font-size:14px;
+    padding:15px 28px;border-radius:2px;transition:background .25s ease, color .25s ease;
+    background:rgba(140,58,70,0.14);
+  }
+  .btn-wine:hover{background:var(--wine-light);color:#fff;}
+  .btn-stone{
+    border:1.5px solid var(--off-white);color:var(--off-white);font-weight:600;font-size:14px;
+    padding:15px 28px;border-radius:2px;transition:background .25s ease, color .25s ease;
+    background:rgba(245,242,236,0.08);
+  }
+  .btn-stone:hover{background:var(--off-white);color:var(--ink);}
 
   /* ===== JOURNEY (signature) ===== */
   .journey{background:var(--panel);padding:80px 0 70px;border-top:1px solid var(--panel-line);border-bottom:1px solid var(--panel-line);}
@@ -194,9 +216,66 @@
   .card.premium{border-color:var(--gold);}
   .card.premium .kicker{color:var(--wine);}
   .card.premium::after{
-    content:'양측 진행 · 5만원 추가할인';position:absolute;top:26px;right:28px;font-size:10.5px;letter-spacing:0.03em;
+    content:'양측 진행 · 10만원 추가할인';position:absolute;top:26px;right:28px;font-size:10.5px;letter-spacing:0.03em;
     background:var(--wine);color:#fff;padding:4px 10px;border-radius:20px;white-space:nowrap;
   }
+
+  /* ===== AVAILABILITY MODAL ===== */
+  .avail-overlay{
+    display:none;position:fixed;inset:0;background:rgba(11,12,14,0.72);
+    z-index:1000;padding:20px;overflow-y:auto;
+  }
+  .avail-overlay.open{display:flex;align-items:flex-start;justify-content:center;}
+  .avail-modal{
+    background:var(--ivory-soft);color:var(--ink-text);border-radius:8px;
+    max-width:520px;width:100%;margin:40px auto;padding:32px 26px 26px;position:relative;
+  }
+  .avail-close{
+    position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;
+    border:1px solid #DDD6C4;background:#fff;font-size:16px;cursor:pointer;color:var(--ink-text);
+    line-height:1;
+  }
+  .avail-close:hover{background:var(--ivory);}
+  .avail-modal-head{text-align:center;margin-bottom:22px;}
+  .avail-modal-head .tag{font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--wine);font-weight:600;display:block;margin-bottom:8px;}
+  .avail-modal-head h3{font-family:'Noto Serif KR',serif;font-size:21px;font-weight:700;}
+  .avail-nav{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:18px;}
+  .avail-nav button{
+    width:32px;height:32px;border-radius:50%;border:1px solid #DDD6C4;background:#fff;
+    color:var(--ink-text);font-size:15px;cursor:pointer;transition:background .2s ease;
+  }
+  .avail-nav button:hover{background:var(--ivory);}
+  .avail-nav button:disabled{opacity:0.35;cursor:not-allowed;}
+  .avail-month-label{font-family:'Noto Serif KR',serif;font-size:17px;font-weight:700;min-width:100px;text-align:center;}
+  .avail-loading, .avail-empty{text-align:center;color:var(--muted);font-size:13.5px;padding:30px 20px;white-space:pre-line;line-height:1.6;}
+  .avail-cal{display:none;}
+  .avail-cal-weekdays{display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:6px;}
+  .avail-cal-weekdays span{text-align:center;font-size:11.5px;color:var(--muted);font-weight:600;padding:6px 0;}
+  .avail-cal-weekdays span:first-child{color:var(--wine);}
+  .avail-cal-weekdays span:last-child{color:var(--wine);}
+  .avail-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+  .avail-cell{
+    min-height:76px;border-radius:4px;padding:6px 3px;display:flex;flex-direction:column;
+    align-items:center;justify-content:flex-start;font-size:10.5px;background:transparent;
+  }
+  .avail-cell .d-num{font-size:12.5px;font-weight:600;color:#B4AEA0;}
+  .avail-cell.empty{visibility:hidden;}
+  .avail-cell.closed .d-num, .avail-cell.past .d-num{color:#D8D2C4;}
+  .avail-cell.bookable{background:var(--ivory);}
+  .avail-cell.bookable .d-num{color:var(--ink-text);}
+  .avail-cell .d-holi{font-size:8px;color:var(--wine);font-weight:600;margin-top:1px;}
+  .avail-cell .d-half{
+    display:flex;align-items:center;gap:3px;font-size:8.5px;margin-top:4px;
+    color:var(--muted);white-space:nowrap;
+  }
+  .avail-cell .d-half .dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+  .avail-cell .d-half.open{color:#3D6E48;}
+  .avail-cell .d-half.open .dot{background:#4C8B5A;}
+  .avail-cell .d-half.full{color:#B4AEA0;}
+  .avail-cell .d-half.full .dot{background:#B4AEA0;}
+  .avail-legend{display:flex;justify-content:center;gap:18px;margin-top:20px;font-size:11.5px;color:var(--muted);flex-wrap:wrap;}
+  .avail-legend span{display:flex;align-items:center;gap:6px;}
+  .avail-legend i.dot{width:7px;height:7px;border-radius:50%;display:inline-block;}
 
   /* ===== BUNDLE HERO CARD ===== */
   .bundle{
@@ -487,7 +566,7 @@
     .hero h1{font-size:25px;line-height:1.5;letter-spacing:-0.005em;}
     .hero p{font-size:13.5px;margin-top:18px;line-height:1.7;}
     .hero-actions{margin-top:28px;gap:10px;}
-    .btn-primary, .btn-ghost{font-size:13px;padding:13px 20px;width:100%;text-align:center;}
+    .btn-primary, .btn-ghost, .btn-wine, .btn-stone{font-size:13px;padding:13px 20px;width:100%;text-align:center;}
 
     .journey{padding:48px 0 40px;}
     .journey-head h2{font-size:20px;}
@@ -567,7 +646,7 @@
 
   <div class="announce">
     <div class="wrap">
-      <p>많은 문의와 관심에 감사드립니다.<span class="line2">성원에 힘입어 8월 한 달 특가 이벤트 연장!</span><span class="line2"><strong>8월 31일까지 패키지 30% 특별할인</strong></span></p>
+      <p>많은 문의와 관심에 감사드립니다.<span class="line2">상담 후 5일 이내 계약확정 시 3만원 할인되는 얼리버드,</span><span class="line2"><strong>후기 작성 혜택까지 상시 적용됩니다</strong></span></p>
       <a href="#pricing">가격 보기</a>
     </div>
   </div>
@@ -579,7 +658,7 @@
       <h1>축의금은 <em>기록</em>으로 남고,<br>하객 응대는 <em>품격</em>으로 남습니다.</h1>
       <p>모먼트웍스는 예식 당일 축의금 접수와 하객 응대를 전담합니다. 접수부터 정산, 전달까지 전 과정을 투명하게 기록해 신랑신부는 예식에만 집중하실 수 있습니다.</p>
       <div class="hero-actions">
-        <a href="#pricing" class="btn-primary">특가 확인하기</a>
+        <a href="#pricing" class="btn-primary">얼리버드 혜택 확인하기</a>
         <a href="http://pf.kakao.com/_FbIfX/chat" target="_blank" rel="noopener" class="btn-ghost">예약일정 문의하기</a>
       </div>
     </div>
@@ -631,71 +710,72 @@
         <span class="tag">Packages &amp; Pricing</span>
         <h2>축의대 패키지</h2>
         <p>가격은 수도권 기준이며, 지역·하객 규모에 따라 별도 안내됩니다.</p>
-        <span class="event-note">🎉 많은 성원에 힘입어 8월 한 달 연장 · 8월 31일까지 예약 확정 시 패키지 30% 할인 적용</span>
+        <span class="event-note">🌅 상담 후 5일 이내 계약확정 시 3만원 할인되는 얼리버드 + 후기 작성 혜택, 상시 적용됩니다</span>
       </div>
 
       <div class="line-group-label">
-        <span class="n">01</span>
-        <h3>기본 패키지</h3>
+        <h3>패키지 안내</h3>
         <span class="sub">하객 응대 · 축의금 접수 · 정산</span>
       </div>
       <div class="cards">
         <div class="card">
-          <span class="event-tag">OPEN EVENT -30%</span>
           <div class="kicker">Standard</div>
           <h4>축의대 스탠다드</h4>
           <div class="desc">2인 1조 기본 응대. 접수 전 과정 영상 기록과 자동 정산표까지 기본으로 포함된 구성입니다.</div>
+          <div class="price-tag">🌅 얼리버드 적용 시</div>
           <div class="price-row num">
             <span class="price-was">450,000원</span>
-            <span class="price-now">315,000<span class="won">원</span></span>
+            <span class="price-now">420,000<span class="won">원</span></span>
           </div>
-          <div class="price-note" style="margin-top:6px;">수도권 기준 · 3시간 내외 · 하객 250명 기준 · 8/31까지 예약 시</div>
+          <div class="price-note" style="margin-top:6px;">수도권 기준 · 3시간 내외 · 하객 250명 기준 · 정가 450,000원</div>
           <ul>
             <li>단정한 차림의 대표 부부 2인 응대</li>
             <li>방명록 · 봉투 이중 관리</li>
-            <li>정산 내역서 전달</li>
             <li>실시간 촬영 · 영상 링크 공유 (한 측당 카메라 1대 제공 · 추가 거치 시 별도 문의)</li>
-            <li>엑셀 자동 정산표 제공</li>
-            <li>하객 안내문 제작 및 비치</li>
-            <li>축의금 인계확인서 제공</li>
-            <li>화환 사진 촬영 및 전달</li>
+            <li>실시간 축의 상세내역 확인 링크 공유 (모먼트웍스 전용 시스템)</li>
+            <li>축의금 인계 확인서 제공</li>
+            <li>정산 세부내역서 파일 전달 (요청 시 인쇄도 가능)</li>
+            <li>하객 안내문 제작 및 비치(요청 시)</li>
+            <li>화환 사진 촬영 및 전달(요청 시)</li>
           </ul>
         </div>
         <div class="card premium">
           <div class="kicker">Both Sides</div>
           <h4>축의대 스탠다드 (양측)</h4>
-          <div class="desc">신랑측과 신부측을 함께 응대하는 4인 2조 구성입니다. 정가 2배 가격에서 5만원이 추가 할인됩니다.</div>
+          <div class="desc">신랑측과 신부측을 함께 응대하는 4인 2조 구성입니다. 스탠다드 정가의 2배(90만원)에 양측 진행 할인과 얼리버드 할인이 더해집니다.</div>
+          <div class="price-tag">🌅 얼리버드 적용 시</div>
           <div class="price-row num">
-            <span class="price-was">630,000원</span>
-            <span class="price-now">580,000<span class="won">원</span></span>
+            <span class="price-was">900,000원</span>
+            <span class="price-now">770,000<span class="won">원</span></span>
           </div>
-          <div class="price-note" style="margin-top:6px;">수도권 기준 · 3시간 내외 · 하객 최대 400명(양가 합산) 기준 · 8/31까지 예약 시</div>
+          <div class="price-steps">정상가 <span class="cut">900,000원</span><span class="arrow">→</span>양측 10만원 할인 <span class="cut">800,000원</span><span class="arrow">→</span>얼리버드 3만원 추가 <strong>770,000원</strong></div>
+          <div class="price-note" style="margin-top:0;">수도권 기준 · 3시간 내외 · 하객 최대 400명(양가 합산) 기준</div>
           <ul>
             <li>스탠다드 구성 전체를 양가에 동일하게 적용</li>
             <li>2인 1조 × 2팀(총 4인) 동시 응대</li>
             <li>신랑측 · 신부측 각각 방명록 · 봉투 관리</li>
-            <li>양측 진행 시 5만원 추가 할인</li>
+            <li>양측 진행 시 10만원 상시 할인 + 얼리버드 3만원 추가 할인</li>
           </ul>
         </div>
         <div class="card">
-          <span class="event-tag">OPEN EVENT -30%</span>
           <div class="kicker">Combined</div>
           <h4>신랑 · 신부 통합 패키지</h4>
-          <div class="desc">신랑측과 신부측 축의대를 한 곳으로 통합해 응대하는 구성입니다. 2인 1조 기본 응대로 진행됩니다.</div>
+          <div class="desc">신랑측과 신부측 축의대를 한 곳으로 통합해 응대하는 구성입니다. 신랑측 1인, 신부측 1인이 각각 담당하는 1인 1조 구성입니다.</div>
+          <div class="price-tag">🌅 얼리버드 적용 시</div>
           <div class="price-row num">
-            <span class="price-was">450,000원</span>
-            <span class="price-now">315,000<span class="won">원</span></span>
+            <span class="price-was">500,000원</span>
+            <span class="price-now">470,000<span class="won">원</span></span>
           </div>
-          <div class="price-note" style="margin-top:6px;">수도권 기준 · 3시간 내외 · 하객 150명 기준 · 8/31까지 예약 시</div>
+          <div class="price-note" style="margin-top:6px;">수도권 기준 · 3시간 내외 · 하객 150명 기준 · 정가 500,000원</div>
           <ul>
-            <li>단정한 차림의 대표 부부 2인 응대</li>
+            <li>신랑측 1인 · 신부측 1인, 각 측 1인 1조로 단정하게 응대</li>
             <li>신랑측 · 신부측 통합 방명록 · 봉투 관리</li>
-            <li>정산 내역서 전달</li>
             <li>실시간 촬영 · 영상 링크 공유 (카메라 1대 제공 · 추가 거치 시 별도 문의)</li>
-            <li>엑셀 자동 정산표 제공</li>
-            <li>하객 안내문 제작 및 비치</li>
-            <li>축의금 인계확인서 제공</li>
-            <li>화환 사진 촬영 및 전달</li>
+            <li>실시간 축의 상세내역 확인 링크 공유 (모먼트웍스 전용 시스템)</li>
+            <li>축의금 인계 확인서 제공</li>
+            <li>정산 세부내역서 파일 전달 (요청 시 인쇄도 가능)</li>
+            <li>하객 안내문 제작 및 비치(요청 시)</li>
+            <li>화환 사진 촬영 및 전달(요청 시)</li>
           </ul>
         </div>
       </div>
@@ -703,18 +783,27 @@
       <div class="promo" style="margin-top:8px;margin-bottom:14px;">
         <span class="promo-icon">🚗</span>
         <div class="promo-body">
-          <span class="promo-tag">Open Event</span>
-          <div class="promo-title">특가기념 출장비 무료 특전!</div>
-          <div class="promo-desc">8월 31일까지 계약 확정 시, <strong>수도권 외 전 지역 출장비가 무료</strong>로 진행됩니다.</div>
+          <span class="promo-tag">Standard Benefit</span>
+          <div class="promo-title">전 지역 출장비 무료 (상시)</div>
+          <div class="promo-desc">별도 신청 없이, <strong>수도권 외 전 지역 출장비가 항상 무료</strong>로 진행됩니다.</div>
+        </div>
+      </div>
+
+      <div class="promo" style="margin-top:0;margin-bottom:14px;">
+        <span class="promo-icon">🎁</span>
+        <div class="promo-body">
+          <span class="promo-tag">Standard Benefit</span>
+          <div class="promo-title">모바일 교환권 답례 발송 대행 서비스</div>
+          <div class="promo-desc"><strong>전 패키지 상시 무료 제공</strong> (모바일 교환권 비용 별도 · 협력사 제휴 특가)</div>
         </div>
       </div>
 
       <div class="promo" style="margin-top:0;margin-bottom:44px;">
-        <span class="promo-icon">🎁</span>
+        <span class="promo-icon">🏆</span>
         <div class="promo-body">
-          <span class="promo-tag">Additional Service</span>
-          <div class="promo-title">모바일 교환권 답례 발송 대행 서비스</div>
-          <div class="promo-desc"><strong>특가 기념 무료 이벤트 진행</strong> (모바일 교환권 비용 별도 · 협력사 제휴 특가)</div>
+          <span class="promo-tag">특별제휴 이벤트</span>
+          <div class="promo-title">LG전자 혼수가전 최저가 도전</div>
+          <div class="promo-desc"><strong>LG베스트샵 판매명장 4회 선정</strong> 경력자가 직접 진행 (기존 견적서 1부로 최대 할인 안내)</div>
         </div>
       </div>
 
@@ -723,46 +812,46 @@
       <div class="extra-inline">
         <div class="extra-head">
           <span class="tag">Extra Savings</span>
-          <h2>특가 이벤트 30%에<span style="display:block;">더 쌓이는 특별할인</span></h2>
+          <h2>정가에 더해<span style="display:block;">계속 쌓이는 상시 할인</span></h2>
           <p>*추가 할인 혜택은 모두 중복 적용 가능합니다.</p>
         </div>
 
         <div class="extra-total">
-          <div class="amount num">9만원 이상 특별추가할인 !</div>
+          <div class="amount num">최대 9만원 상시 할인 !</div>
         </div>
 
         <div class="coupons">
           <div class="coupon coupon-featured">
-            <span class="c-badge">⚡ 즉시 할인</span>
-            <div class="c-amount"><span class="c-icon">💰</span><span class="c-num num">2만원</span></div>
+            <span class="c-badge">🌅 얼리버드</span>
+            <div class="c-amount"><span class="c-icon">📅</span><span class="c-num num">3만원</span></div>
             <div>
-              <div class="c-title">빠른 예약확정 할인</div>
-              <div class="c-desc">첫 상담 후 <strong style="color:var(--gold-light);">5일 이내 예약을 확정</strong>하시면 20,000원이 그 자리에서 바로 할인됩니다.</div>
-              <span class="c-cap">상담일 기준 5일 이내 · 즉시 적용</span>
+              <div class="c-title">얼리버드 예약 할인</div>
+              <div class="c-desc">예식일까지 남은 기간과 상관없이, <strong style="color:var(--gold-light);">상담일 기준 5일 이내 계약을 확정</strong>하시면 3만원이 할인됩니다.</div>
+              <span class="c-cap">상담일 기준 5일 이내 계약확정 · 전 패키지 공통</span>
             </div>
           </div>
           <div class="coupon">
-            <div class="c-amount"><span class="c-icon">💵</span><span class="c-num num">1만원</span></div>
-            <div>
-              <div class="c-title">계약 리뷰 이벤트</div>
-              <div class="c-desc">예약 계약 후 카페·블로그·SNS 중 원하는 채널에 계약 후기를 남기면 채널당 10,000원씩 할인됩니다.</div>
-              <span class="c-cap">채널당 1만원 · 최대 3만원</span>
-            </div>
-          </div>
-          <div class="coupon">
-            <div class="c-amount"><span class="c-icon">💵</span><span class="c-num num">1만원</span></div>
-            <div>
-              <div class="c-title">본식 진행 리뷰 이벤트</div>
-              <div class="c-desc">예식 당일 진행 후 카페·블로그·SNS 중 원하는 채널에 후기를 남기면 채널당 10,000원씩 할인됩니다.</div>
-              <span class="c-cap">채널당 1만원 · 최대 3만원</span>
-            </div>
-          </div>
-          <div class="coupon">
-            <div class="c-amount"><span class="c-icon">💵</span><span class="c-num num">1만원</span></div>
+            <div class="c-amount"><span class="c-icon">💵</span><span class="c-num num">2만원</span></div>
             <div>
               <div class="c-title">짝꿍 할인 이벤트</div>
-              <div class="c-desc">계약 진행 시 발급되는 짝꿍 코드로 지인 소개 시, 최대 계약금액까지 계속적으로 1인 10,000원씩 할인받으실 수 있습니다.</div>
-              <span class="c-cap">짝꿍 코드 사용 · 계약금액까지 누적 할인</span>
+              <div class="c-desc">계약 진행 시 발급되는 짝꿍코드를 입력하면 2만원이 할인됩니다.</div>
+              <span class="c-cap">짝꿍코드 입력 시 적용</span>
+            </div>
+          </div>
+          <div class="coupon">
+            <div class="c-amount"><span class="c-icon">💵</span><span class="c-num num">2만원</span></div>
+            <div>
+              <div class="c-title">계약 리뷰 이벤트</div>
+              <div class="c-desc">계약 후 카페·블로그·SNS 중 원하는 채널 1곳에 계약 후기를 남기면 2만원이 할인됩니다.</div>
+              <span class="c-cap">채널 1곳 후기 작성 시 적용</span>
+            </div>
+          </div>
+          <div class="coupon">
+            <div class="c-amount"><span class="c-icon">💵</span><span class="c-num num">2만원</span></div>
+            <div>
+              <div class="c-title">본식 리뷰 이벤트</div>
+              <div class="c-desc">예식 당일 진행 후 카페·블로그·SNS 중 원하는 채널 1곳에 후기를 남기면 2만원이 할인됩니다.</div>
+              <span class="c-cap">채널 1곳 후기 작성 시 적용</span>
             </div>
           </div>
         </div>
@@ -818,8 +907,8 @@
       </div>
       <div class="faq">
         <div class="faq-item">
-          <div class="q"><span class="m">Q.</span> 특가 이벤트 30% 할인은 정확히 어떻게 적용되나요?</div>
-          <div class="a">고객님들의 많은 문의와 관심에 힘입어 특가 이벤트를 8월 한 달 더 연장합니다. 8월 31일까지 예약금 입금으로 예약이 확정된 고객에 한해 축의대 스탠다드·양측 진행 패키지 가격에 적용됩니다. 예식일이 이후 날짜라도 예약 확정 시점이 8월 31일 이전이면 할인가가 유지됩니다. 아래 추가 할인 이벤트는 30% 할인과 별도로 중복 적용됩니다.</div>
+          <div class="q"><span class="m">Q.</span> 얼리버드 할인은 정확히 어떻게 적용되나요?</div>
+          <div class="a">예식일까지 남은 기간과 상관없이 동일하게 적용됩니다. 첫 상담 후 5일 이내에 예약금 입금으로 계약을 확정하시면 3만원이 할인되며, 짝꿍 할인·계약 리뷰·본식 리뷰 등 다른 상시 할인 이벤트와도 모두 중복 적용됩니다.</div>
         </div>
         <div class="faq-item">
           <div class="q"><span class="m">Q.</span> 하객이 400명 이상이면 어떻게 되나요?</div>
@@ -827,11 +916,11 @@
         </div>
         <div class="faq-item">
           <div class="q"><span class="m">Q.</span> 지방 예식도 진행하시나요?</div>
-          <div class="a">가능합니다. 원래는 이동 거리에 따라 별도 출장비가 발생하지만, <strong style="color:var(--wine);">8월 31일까지 계약 확정 시 특가 기념으로 수도권 외 전 지역 출장비가 무료</strong>로 진행됩니다.</div>
+          <div class="a">가능합니다. 원래는 이동 거리에 따라 별도 출장비가 발생하는 경우가 많지만, 모먼트웍스는 <strong style="color:var(--wine);">수도권 외 전 지역 출장비를 상시 무료</strong>로 제공합니다.</div>
         </div>
         <div class="faq-item">
           <div class="q"><span class="m">Q.</span> 예약은 언제까지 해야 하나요?</div>
-          <div class="a">성수기(봄·가을) 주말은 예약이 빠르게 마감되므로, 예식일 최소 2개월 전 문의를 권장드립니다.</div>
+          <div class="a">성수기(봄·가을) 주말은 예약이 빠르게 마감되므로, 예식일 최소 2개월 전 문의를 권장드립니다. 얼리버드 3만원 할인은 첫 상담 후 5일 이내 계약을 확정하시면 예식일과 상관없이 동일하게 적용됩니다.</div>
         </div>
       </div>
     </div>
@@ -893,7 +982,8 @@
           </select>
         </div>
         <button type="button" class="btn-primary cf-submit" onclick="momentWorksSendConsult()">상담예약하기</button>
-        <a href="http://pf.kakao.com/_FbIfX/chat" target="_blank" rel="noopener" class="btn-ghost cf-submit" style="margin-top:12px;">카카오톡으로 예약일정 문의하기</a>
+        <a href="http://pf.kakao.com/_FbIfX/chat" target="_blank" rel="noopener" class="btn-wine cf-submit" style="margin-top:12px;">카카오톡 예약문의하기</a>
+        <button type="button" class="btn-stone cf-submit" style="margin-top:12px;" onclick="availOpen()">📅 예약 가능한 일정 확인하기</button>
       </form>
 
       <div class="footer-bottom wrap" style="padding:0;">
@@ -902,6 +992,38 @@
       </div>
     </div>
   </footer>
+
+  <!-- AVAILABILITY MODAL -->
+  <div class="avail-overlay" id="availOverlay">
+    <div class="avail-modal">
+      <button type="button" class="avail-close" aria-label="닫기" onclick="availClose()">✕</button>
+      <div class="avail-modal-head">
+        <span class="tag">Check Availability</span>
+        <h3>예약 가능한 일정</h3>
+      </div>
+
+      <div class="avail-nav">
+        <button type="button" id="availPrevMonth" aria-label="이전 달">‹</button>
+        <div id="availMonthLabel" class="avail-month-label num">-</div>
+        <button type="button" id="availNextMonth" aria-label="다음 달">›</button>
+      </div>
+
+      <div id="availLoading" class="avail-loading">일정을 불러오는 중입니다...</div>
+      <div id="availEmpty" class="avail-empty" style="display:none;">일정 정보를 불러오지 못했습니다. 카카오톡으로 문의해주세요.</div>
+
+      <div class="avail-cal" id="availCal">
+        <div class="avail-cal-weekdays">
+          <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+        </div>
+        <div class="avail-cal-grid" id="availCalGrid"></div>
+      </div>
+
+      <div class="avail-legend">
+        <span><i class="dot" style="background:#4C8B5A;"></i> 예약가능 (오전/오후)</span>
+        <span><i class="dot" style="background:#B4AEA0;"></i> 예약마감</span>
+      </div>
+    </div>
+  </div>
 
   <script>
     function momentWorksSendConsult(){
@@ -926,6 +1048,385 @@
       var smsUrl = 'sms:01099529829?body=' + encodeURIComponent(body);
       window.location.href = smsUrl;
     }
+
+    /* =========================================================
+       예약 가능한 일정 보기 (Availability Calendar Modal)
+       -------------------------------------------------------
+       기본 데이터 소스는 구글 시트입니다. 예식일(예: "2026-09-12"
+       또는 "2026. 9. 12")과 시간(예: "11:00", "오전 11:00") 컬럼의
+       헤더명이 GOOGLE_SHEET_CONFIG의 dateHeader/timeHeader와 정확히
+       일치해야 합니다. 시트는 "링크가 있는 모든 사용자 - 뷰어"로
+       공유되어 있어야 브라우저에서 바로 읽을 수 있습니다.
+
+       추후 수파베이스(신규 프로젝트)로 전환하려면 dataSource를
+       'supabase'로 바꾸고 AVAIL_CONFIG의 supabaseUrl / table /
+       컬럼명을 실제 값으로 채워주세요. anon key는 이미 반영해
+       두었습니다.
+       ========================================================= */
+    var GOOGLE_SHEET_CONFIG = {
+      sheetId: '1bSZC9CEqC25URN8bBbnF9qjsJubHx7em-3HqnhjDnGw',
+      gid: '0',
+      dateHeader: '예식일자', // 헤더 텍스트 검색용 (컬럼 문자를 지정하면 사용되지 않음)
+      timeHeader: '예식시간',
+      dateColumnLetter: 'I', // 예식일자가 있는 열
+      timeColumnLetter: 'J'  // 예식시간이 있는 열
+    };
+
+    var AVAIL_CONFIG = {
+      dataSource: 'google_sheet', // 'google_sheet' | 'supabase'
+
+      // --- 구글 시트를 쓸 경우 아래는 사용되지 않습니다 ---
+      supabaseUrl: 'https://lngdohdypmonqgzsmiuk.supabase.co', // 신규 프로젝트 URL
+      supabaseAnonKey: 'sb_publishable_cB2CeTW6qEsJQhGXA_FbdA_GrRy9fOc',
+      table: 'bookings',        // TODO: 신규 프로젝트의 실제 예약 테이블명
+      dateColumn: '예식일자',      // TODO: 실제 날짜 컬럼명
+      timeColumn: '예식시간',        // TODO: 실제 시간 컬럼명
+      statusColumn: 'status',   // TODO: 예약 상태 컬럼명 (없다면 이 필터는 제거 필요)
+      confirmedValue: 'confirmed', // TODO: '계약 확정' 상태값
+
+      amStart: 6,    // 오전 시작 시각 (06:00)
+      amEnd: 14.5,   // 오전 마감 기준 (06:00~14:30 = 오전)
+      pmStart: 14.5167, // 오후 시작 시각 (14:31)
+      pmEnd: 23,     // 오후 마감 기준 (14:31~23:00 = 오후)
+      monthsAhead: 2      // 오늘 이후 몇 개월치를 미리 불러올지
+    };
+
+    // 2026년 대한민국 공휴일 (대체공휴일 포함) — 매년 직접 갱신이 필요합니다.
+    // 출처: 관공서의 공휴일에 관한 규정 기준, 확정 전 사안(제헌절 재지정 등)은
+    // 확정되는 대로 이 배열만 수정하면 됩니다.
+    var KR_HOLIDAYS_2026 = [
+      '2026-01-01', // 신정
+      '2026-02-16', // 설날 연휴
+      '2026-02-17', // 설날
+      '2026-02-18', // 설날 연휴
+      '2026-03-01', // 삼일절
+      '2026-03-02', // 삼일절 대체공휴일
+      '2026-05-05', // 어린이날
+      '2026-05-24', // 부처님오신날
+      '2026-05-25', // 부처님오신날 대체공휴일
+      '2026-06-06', // 현충일
+      '2026-07-17', // 제헌절
+      '2026-08-15', // 광복절
+      '2026-08-17', // 광복절 대체공휴일
+      '2026-09-24', // 추석 연휴
+      '2026-09-25', // 추석
+      '2026-09-26', // 추석 연휴
+      '2026-10-03', // 개천절
+      '2026-10-05', // 개천절 대체공휴일
+      '2026-10-09', // 한글날
+      '2026-12-25'  // 크리스마스
+    ];
+    function availIsHoliday(dateStr){ return KR_HOLIDAYS_2026.indexOf(dateStr) !== -1; }
+
+    var availState = { bookingsByDate: {}, viewYear: null, viewMonth: null, loaded: false, loading: false };
+
+    function availPad(n){ return n < 10 ? '0' + n : '' + n; }
+    function availDateStr(y, m, d){ return y + '-' + availPad(m + 1) + '-' + availPad(d); }
+    function availParseTime(t){
+      // 'HH:MM' or 'HH:MM:SS' 형태를 시(decimal)로 변환
+      if(!t) return null;
+      var parts = ('' + t).split(':');
+      var h = parseInt(parts[0], 10);
+      var m = parts.length > 1 ? parseInt(parts[1], 10) : 0;
+      if(isNaN(h)) return null;
+      return h + (m || 0) / 60;
+    }
+
+    // ---- CSV 파서 (따옴표로 감싼 필드의 콤마/줄바꿈까지 처리) ----
+    function availParseCSV(text){
+      var rows = [], row = [], field = '', inQuotes = false;
+      for(var i = 0; i < text.length; i++){
+        var c = text[i];
+        if(inQuotes){
+          if(c === '"'){
+            if(text[i+1] === '"'){ field += '"'; i++; } else { inQuotes = false; }
+          } else field += c;
+        } else {
+          if(c === '"') inQuotes = true;
+          else if(c === ','){ row.push(field); field = ''; }
+          else if(c === '\n'){ row.push(field); rows.push(row); row = []; field = ''; }
+          else if(c === '\r'){ /* skip */ }
+          else field += c;
+        }
+      }
+      if(field.length || row.length){ row.push(field); rows.push(row); }
+      return rows;
+    }
+
+    // "2026-09-12" / "2026. 9. 12" / "2026/9/12" 등을 YYYY-MM-DD로 정규화
+    function availParseSheetDate(raw){
+      if(!raw) return null;
+      var m = ('' + raw).trim().match(/(\d{4})\D+(\d{1,2})\D+(\d{1,2})/);
+      if(!m) return null;
+      return m[1] + '-' + availPad(parseInt(m[2], 10)) + '-' + availPad(parseInt(m[3], 10));
+    }
+
+    // "11:00" / "오전 11:00" / "오후 3:30" 등을 HH:MM으로 정규화
+    function availParseSheetTime(raw){
+      if(!raw) return null;
+      var s = ('' + raw).trim();
+      var m = s.match(/(\d{1,2}):(\d{2})/);
+      if(!m) return null;
+      var h = parseInt(m[1], 10);
+      var min = parseInt(m[2], 10);
+      if(/오후|PM/i.test(s) && h < 12) h += 12;
+      if(/오전|AM/i.test(s) && h === 12) h = 0;
+      return availPad(h) + ':' + availPad(min);
+    }
+
+    async function availFetchFromGoogleSheet(){
+      var g = GOOGLE_SHEET_CONFIG;
+      // gviz/tq 엔드포인트는 CORS를 허용해 브라우저 fetch로 바로 읽을 수 있습니다.
+      // (export?format=csv 엔드포인트는 CORS를 막아 'Failed to fetch'가 발생합니다)
+      var url = 'https://docs.google.com/spreadsheets/d/' + g.sheetId
+        + '/gviz/tq?tqx=out:csv&gid=' + g.gid;
+
+      // 파일을 더블클릭해서 file:// 로 열면 브라우저가 외부 요청 자체를 차단합니다.
+      if(location.protocol === 'file:'){
+        throw new Error(
+          '지금 이 페이지를 파일 탐색기에서 직접 더블클릭해서 열고 계신 것 같아요(주소창이 file:// 로 시작).\n' +
+          '이 방식은 브라우저 보안 정책상 외부 데이터를 아예 불러올 수 없습니다.\n' +
+          '실제 호스팅 주소(https://...)에 업로드한 뒤 그 주소로 접속해서 테스트해주세요.'
+        );
+      }
+
+      var res;
+      try {
+        res = await fetch(url);
+      } catch(networkErr){
+        throw new Error(
+          '구글 시트에 연결하는 중 오류가 발생했습니다.\n' +
+          '① 시트가 "링크가 있는 모든 사용자 - 뷰어"로 공유되어 있는지\n' +
+          '② 인터넷 연결 또는 광고 차단(애드블록) 확장 프로그램이 요청을 막고 있지 않은지 확인해주세요.\n' +
+          '(상세 오류: ' + (networkErr && networkErr.message ? networkErr.message : networkErr) + ')'
+        );
+      }
+      if(!res.ok) throw new Error('구글 시트를 불러오지 못했습니다 (' + res.status + '). 시트가 "링크가 있는 모든 사용자 - 뷰어"로 공유되어 있는지 확인해주세요.');
+      var text = await res.text();
+      text = text.replace(/^\uFEFF/, ''); // 구글 CSV 응답 맨 앞에 붙는 BOM(보이지 않는 문자) 제거
+
+      // 비공개 시트일 경우 CSV 대신 구글 로그인/권한 안내 HTML 페이지가 내려옵니다.
+      if(/^\s*<(!doctype|html)/i.test(text) || text.indexOf('accounts.google.com') !== -1){
+        throw new Error('이 시트는 비공개 상태로 보입니다. 시트 우측 상단 "공유" → "링크가 있는 모든 사용자" + 권한 "뷰어"로 변경해주세요.');
+      }
+
+      var rows = availParseCSV(text);
+      if(rows.length < 1) return [];
+
+      function availColLetterToIndex(letter){
+        var s = ('' + letter).trim().toUpperCase();
+        var idx = 0;
+        for(var i = 0; i < s.length; i++){ idx = idx * 26 + (s.charCodeAt(i) - 64); }
+        return idx - 1; // 0-based
+      }
+
+      var dateIdx, timeIdx;
+      if(g.dateColumnLetter && g.timeColumnLetter){
+        // 열 문자가 지정되어 있으면 헤더 텍스트와 무관하게 바로 그 열을 사용합니다.
+        dateIdx = availColLetterToIndex(g.dateColumnLetter);
+        timeIdx = availColLetterToIndex(g.timeColumnLetter);
+      } else {
+        // (열 문자가 없을 때의 대체 경로) 헤더 텍스트로 탐색
+        var normalize = function(s){
+          return ('' + s).replace(/\uFEFF/g, '').replace(/\s+/g, '').trim();
+        };
+        var targetDate = normalize(g.dateHeader);
+        var targetTime = normalize(g.timeHeader);
+        var HEADER_SEARCH_ROWS = 40;
+        dateIdx = -1; timeIdx = -1;
+        for(var r = 0; r < Math.min(HEADER_SEARCH_ROWS, rows.length); r++){
+          var normalized = rows[r].map(normalize);
+          for(var ci = 0; ci < normalized.length; ci++){
+            if(dateIdx === -1 && normalized[ci] && normalized[ci].indexOf(targetDate) !== -1) dateIdx = ci;
+            if(timeIdx === -1 && normalized[ci] && normalized[ci].indexOf(targetTime) !== -1) timeIdx = ci;
+          }
+          if(dateIdx !== -1 && timeIdx !== -1) break;
+        }
+        if(dateIdx === -1 || timeIdx === -1){
+          throw new Error('시트에서 "' + g.dateHeader + '" 또는 "' + g.timeHeader + '" 헤더를 찾지 못했습니다. GOOGLE_SHEET_CONFIG에 dateColumnLetter/timeColumnLetter를 지정해주세요.');
+        }
+      }
+
+      // 헤더/제목/요약 행이 몇 줄이든 상관없이, 날짜 컬럼 값이 실제 날짜로
+      // 파싱되는 행만 데이터로 인식합니다 (제목·빈 행은 자동으로 건너뜀).
+      var out = [];
+      for(var i = 0; i < rows.length; i++){
+        var row = rows[i];
+        if(!row || row.length === 0) continue;
+        var dateStr = availParseSheetDate(row[dateIdx]);
+        if(!dateStr) continue;
+        var timeStr = availParseSheetTime(row[timeIdx]);
+        out.push({ date: dateStr, time: timeStr });
+      }
+
+      if(out.length === 0){
+        var colPreview = rows.slice(0, 20).map(function(row, idx){
+          return (idx + 1) + '행 → ' + (row[dateIdx] || '(비어있음)') + ' / ' + (row[timeIdx] || '(비어있음)');
+        }).join('\n');
+        console.error('[모먼트웍스] ' + g.dateColumnLetter + '열/' + g.timeColumnLetter + '열에서 읽은 상위 20개 행:\n' + colPreview);
+        throw new Error(
+          g.dateColumnLetter + '열에서 유효한 날짜를 하나도 찾지 못했습니다.\n' +
+          '브라우저 개발자도구(F12) → Console 탭에서 실제로 읽은 값을 확인할 수 있어요.'
+        );
+      }
+
+      return out;
+    }
+
+    async function availFetchFromSupabase(fromDateStr, toDateStr){
+      var c = AVAIL_CONFIG;
+      var url = c.supabaseUrl + '/rest/v1/' + c.table
+        + '?select=' + c.dateColumn + ',' + c.timeColumn + ',' + c.statusColumn
+        + '&' + c.statusColumn + '=eq.' + encodeURIComponent(c.confirmedValue)
+        + '&' + c.dateColumn + '=gte.' + fromDateStr
+        + '&' + c.dateColumn + '=lte.' + toDateStr;
+
+      var res = await fetch(url, {
+        headers: {
+          'apikey': c.supabaseAnonKey,
+          'Authorization': 'Bearer ' + c.supabaseAnonKey
+        }
+      });
+      if(!res.ok) throw new Error('일정 데이터를 불러오지 못했습니다 (' + res.status + ')');
+      var rows = await res.json();
+      return rows.map(function(row){
+        return { date: row[c.dateColumn], time: row[c.timeColumn] };
+      });
+    }
+
+    async function availFetchBookings(){
+      if(AVAIL_CONFIG.dataSource === 'supabase'){
+        var today = new Date();
+        var fromStr = availDateStr(today.getFullYear(), today.getMonth(), today.getDate());
+        var toDate = new Date(today.getFullYear(), today.getMonth() + AVAIL_CONFIG.monthsAhead + 1, 0);
+        var toStr = availDateStr(toDate.getFullYear(), toDate.getMonth(), toDate.getDate());
+        return availFetchFromSupabase(fromStr, toStr);
+      }
+      return availFetchFromGoogleSheet();
+    }
+
+    function availComputeDayStatus(dateStr){
+      var c = AVAIL_CONFIG;
+      var list = availState.bookingsByDate[dateStr] || [];
+      var amClosed = false, pmClosed = false;
+
+      list.forEach(function(raw){
+        var t = availParseTime(raw);
+        if(t === null) return;
+        if(t >= c.amStart && t <= c.amEnd) amClosed = true;
+        if(t > c.amEnd && t <= c.pmEnd) pmClosed = true;
+      });
+
+      return {
+        am: amClosed ? 'full' : 'open',
+        pm: pmClosed ? 'full' : 'open'
+      };
+    }
+
+    function availRenderMonth(year, month /* 0-indexed */){
+      var label = document.getElementById('availMonthLabel');
+      var gridEl = document.getElementById('availCalGrid');
+      label.textContent = year + '년 ' + (month + 1) + '월';
+
+      var firstDow = new Date(year, month, 1).getDay();
+      var daysInMonth = new Date(year, month + 1, 0).getDate();
+      var today = new Date(); today.setHours(0,0,0,0);
+      var cells = [];
+
+      for(var i = 0; i < firstDow; i++){
+        cells.push('<div class="avail-cell empty"></div>');
+      }
+
+      for(var d = 1; d <= daysInMonth; d++){
+        var dateObj = new Date(year, month, d);
+        var dow = dateObj.getDay();
+        var isPast = dateObj < today;
+        var dateStr = availDateStr(year, month, d);
+        var isWeekend = (dow === 0 || dow === 6);
+        var isHoliday = availIsHoliday(dateStr);
+        var isBookable = isWeekend || isHoliday;
+
+        if(isPast){
+          cells.push('<div class="avail-cell past"><span class="d-num num">' + d + '</span></div>');
+          continue;
+        }
+        if(!isBookable){
+          cells.push('<div class="avail-cell closed"><span class="d-num num">' + d + '</span></div>');
+          continue;
+        }
+
+        var status = availComputeDayStatus(dateStr);
+        var holidayMark = isHoliday && !isWeekend ? ' <span class="d-holi">공휴일</span>' : '';
+
+        cells.push(
+          '<div class="avail-cell bookable"><span class="d-num num">' + d + '</span>' + holidayMark +
+          '<div class="d-half ' + status.am + '"><span class="dot"></span>오전 ' + (status.am === 'open' ? '가능' : '마감') + '</div>' +
+          '<div class="d-half ' + status.pm + '"><span class="dot"></span>오후 ' + (status.pm === 'open' ? '가능' : '마감') + '</div>' +
+          '</div>'
+        );
+      }
+
+      gridEl.innerHTML = cells.join('');
+
+      document.getElementById('availPrevMonth').disabled =
+        (year === today.getFullYear() && month === today.getMonth());
+    }
+
+    function availChangeMonth(delta){
+      var d = new Date(availState.viewYear, availState.viewMonth + delta, 1);
+      availState.viewYear = d.getFullYear();
+      availState.viewMonth = d.getMonth();
+      availRenderMonth(availState.viewYear, availState.viewMonth);
+    }
+
+    async function availLoadData(){
+      var today = new Date();
+      availState.viewYear = today.getFullYear();
+      availState.viewMonth = today.getMonth();
+
+      try {
+        var rows = await availFetchBookings();
+        var byDate = {};
+        rows.forEach(function(row){
+          var dt = row.date;
+          var tm = row.time;
+          if(!dt) return;
+          if(!byDate[dt]) byDate[dt] = [];
+          byDate[dt].push(tm);
+        });
+        availState.bookingsByDate = byDate;
+        availState.loaded = true;
+
+        document.getElementById('availLoading').style.display = 'none';
+        document.getElementById('availCal').style.display = 'block';
+        availRenderMonth(availState.viewYear, availState.viewMonth);
+      } catch(err){
+        document.getElementById('availLoading').style.display = 'none';
+        document.getElementById('availEmpty').style.display = 'block';
+        document.getElementById('availEmpty').textContent = err.message || '일정 정보를 불러오지 못했습니다. 카카오톡으로 문의해주세요.';
+        console.error('[모먼트웍스 일정 연동 오류]', err);
+      }
+    }
+
+    function availOpen(){
+      document.getElementById('availOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      if(!availState.loaded && !availState.loading){
+        availState.loading = true;
+        availLoadData();
+      }
+    }
+
+    function availClose(){
+      document.getElementById('availOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('availOverlay').addEventListener('click', function(e){
+      if(e.target === this) availClose();
+    });
+    document.getElementById('availPrevMonth').addEventListener('click', function(){ availChangeMonth(-1); });
+    document.getElementById('availNextMonth').addEventListener('click', function(){ availChangeMonth(1); });
   </script>
 
 </body>
