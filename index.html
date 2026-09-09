@@ -216,9 +216,56 @@
   .card.premium{border-color:var(--gold);}
   .card.premium .kicker{color:var(--wine);}
   .card.premium::after{
-    content:'양측 진행 · 10만원 추가할인';position:absolute;top:26px;right:28px;font-size:10.5px;letter-spacing:0.03em;
+    content:'양측 진행 · 12만원 추가할인';position:absolute;top:26px;right:28px;font-size:10.5px;letter-spacing:0.03em;
     background:var(--wine);color:#fff;padding:4px 10px;border-radius:20px;white-space:nowrap;
   }
+
+  /* ===== SAVINGS BADGE + PRICE HERO ===== */
+  .savings-badge{
+    display:inline-flex;align-items:center;gap:5px;
+    background:var(--wine);color:#fff;font-size:11.5px;font-weight:700;
+    padding:5px 12px;border-radius:20px;margin-bottom:14px;letter-spacing:0.01em;
+  }
+  .price-hero{margin-bottom:4px;}
+  .price-hero .was-sm{font-size:13px;color:#B4AEA0;text-decoration:line-through;margin-bottom:2px;}
+  .price-final{display:flex;align-items:baseline;gap:5px;}
+  .price-final .pf-label{font-size:13px;color:var(--wine);font-weight:700;}
+  .price-final .pf-num{font-size:32px;font-weight:800;color:var(--wine);}
+  .price-final .won{font-size:16px;font-weight:500;color:var(--wine);margin-left:1px;}
+  .price-final .pf-suffix{font-size:13px;color:var(--muted);margin-left:2px;}
+
+  /* ===== DISCOUNT CASCADE (RECEIPT STYLE) ===== */
+  .discount-steps{border-top:1px solid #EEE8DA;margin:18px 0 0;padding-top:14px;}
+  .ds-row{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;padding:5px 0;color:#4A443C;}
+  .ds-row .ds-label{color:#6E6A62;}
+  .ds-row .ds-amt{color:#4A443C;}
+  .ds-row .ds-amt.minus{color:var(--wine);font-weight:600;}
+  .ds-row.ds-base{font-weight:700;color:var(--ink-text);border-bottom:1px dashed #E3DDCF;padding-bottom:8px;margin-bottom:2px;font-size:13px;}
+  .ds-row.ds-total{font-weight:800;color:var(--wine);border-top:1px solid #E3DDCF;margin-top:6px;padding-top:10px;font-size:14.5px;}
+  .ds-note, .ds-subnote{
+    font-size:11px;font-weight:700;color:var(--wine);
+    border:1px solid rgba(110,36,48,0.3);border-radius:4px;
+    background:#FBF3F2;padding:6px 10px;line-height:1.55;
+  }
+  .ds-subnote{margin:-2px 0 10px;}
+  .ds-note{margin-top:12px;padding:10px 12px;}
+  .ds-note-featured{
+    background:linear-gradient(135deg, rgba(184,146,90,0.18), rgba(110,36,48,0.16));
+    border:1.5px solid var(--wine);padding:13px 15px;
+  }
+  .ds-note-featured .ds-note-title{font-size:13px;font-weight:800;color:var(--wine);margin-bottom:5px;}
+  .ds-note-featured .ds-note-body{font-size:12px;font-weight:700;color:var(--wine);line-height:1.6;}
+  .ds-note-featured .ds-note-body + .ds-note-body{margin-top:3px;}
+
+  /* 패키지 안내 영역 전체 굵은 글씨 */
+  .cards .desc, .cards .was-sm, .cards .ds-row .ds-label, .cards .ds-row .ds-amt{font-weight:700;}
+
+  /* ===== SHARED SERVICE LIST ===== */
+  .service-card{background:#fff;border:1px solid #E3DDCF;border-radius:4px;padding:30px 32px;margin-bottom:44px;}
+  .service-card ul{list-style:none;columns:2;column-gap:36px;}
+  @media(max-width:640px){.service-card ul{columns:1;}}
+  .service-card li{font-size:13.5px;padding:7px 0;padding-left:18px;position:relative;color:#4A443C;break-inside:avoid;}
+  .service-card li::before{content:'—';position:absolute;left:0;color:var(--gold);}
 
   /* ===== AVAILABILITY MODAL ===== */
   .avail-overlay{
@@ -726,76 +773,109 @@
         <div class="card">
           <div class="kicker">Standard</div>
           <h4>축의대 한측</h4>
-          <div class="desc">2인 1조 기본 응대. 접수 전 과정 영상 기록과 자동 정산표까지 기본으로 포함된 구성입니다.</div>
-          <div class="price-tag">🌅 얼리버드 적용 시</div>
-          <div class="price-row num">
-            <span class="price-was">450,000원</span>
-            <span class="price-now">420,000<span class="won">원</span></span>
+          <div class="desc">2인 1조 기본 응대. 하객 250명 기준 · 수도권 3시간 내외 진행 구성입니다.</div>
+          <div class="savings-badge">🔥 최대 16만원 할인</div>
+          <div class="price-hero">
+            <div class="was-sm num">정상가 450,000원</div>
+            <div class="price-final"><span class="pf-label">최저</span><span class="pf-num num">290,000</span><span class="won">원</span><span class="pf-suffix">부터</span></div>
           </div>
-          <div class="price-note" style="margin-top:6px;">수도권 기준 · 3시간 내외 · 하객 250명 기준 · 정가 450,000원</div>
-          <ul>
-            <li>대표 부부 2인 모든 예식 직접 참석 · 현장 운영</li>
-            <li>축의대 운영 설정서를 기반으로 한 맞춤형 현장 운영</li>
-            <li>축의금 접수 · 기록 및 하객 응대</li>
-            <li>방명록 · 봉투 관리 및 축의금 · 식권 수량/금액 기록</li>
-            <li>계좌이체 하객 검증 후 식권 배부</li>
-            <li>실시간 축의금 현황 모니터링 시스템 제공 (모먼트웍스 전용)</li>
-            <li>실시간 촬영 카메라 1대 제공 · 영상 링크 공유 (한 측당)</li>
-            <li>PDF · 엑셀 축의금 내역서 제공 (요청 시 종이 출력물 제공)</li>
-            <li>예식 안내문 제작 및 비치 (한 측만 계약 시에도 양측 제작)</li>
-            <li>화환 사진 촬영 및 전달 (요청 시)</li>
-            <li>현금영수증 발행 (잔금 정산 후 계약금 + 잔금 기준)</li>
-          </ul>
+          <div class="discount-steps">
+            <div class="ds-row ds-base"><span class="ds-label">정상가</span><span class="ds-amt num">450,000원</span></div>
+            <div class="ds-row"><span class="ds-label">🌅 얼리버드</span><span class="ds-amt num minus">−30,000원</span></div>
+            <div class="ds-subnote">📌 상담일 포함 5일 이내 계약 시</div>
+            <div class="ds-row"><span class="ds-label">🤝 짝꿍할인</span><span class="ds-amt num minus">−20,000원</span></div>
+            <div class="ds-subnote">📌 소개해 주신 분(기존 계약자)의 짝꿍코드 사용 시</div>
+            <div class="ds-row"><span class="ds-label">✍️ 계약 후기 (1건당 2만원, 최대 2건)</span><span class="ds-amt num minus">−40,000원</span></div>
+            <div class="ds-subnote">📌  본식 전날까지 작성 시 잔금에서 차감(블로그, 스레드, 카페 등)</div>
+            <div class="ds-row"><span class="ds-label">🎥 본식 후기 (1건당 2만원, 최대 2건)</span><span class="ds-amt num minus">−40,000원</span></div>
+            <div class="ds-subnote">📌 본식 종료 후 2개월 이내 작성 시 페이백(블로그, 스레드, 카페 등)</div>
+            <div class="ds-row"><span class="ds-label">👥 하객 100인 이하</span><span class="ds-amt num minus">−30,000원</span></div>
+            <div class="ds-subnote">📌 본식 종료 후 잔금에서 차감</div>
+            <div class="ds-row ds-total"><span class="ds-label">최저 적용가</span><span class="ds-amt num">290,000원</span></div>
+          </div>
+          <div class="ds-note ds-note-featured">
+            <div class="ds-note-title">📌 짝꿍소개 할인 이벤트</div>
+            <div class="ds-note-body">짝꿍코드로 소개 시 소개해 주신 분에게 1건당 1만원 무제한 페이백(계약금액 한도 내)</div>
+            <div class="ds-note-body">→ 위 최저가에서 추가 할인까지 받을 수 있어요.</div>
+          </div>
         </div>
         <div class="card premium">
           <div class="kicker">Both Sides</div>
           <h4>축의대 양측</h4>
-          <div class="desc">신랑측과 신부측을 함께 응대하는 4인 2조 구성입니다. 한측 정가의 2배(90만원)에 양측 진행 할인과 얼리버드 할인이 더해집니다.</div>
-          <div class="price-tag">🌅 얼리버드 적용 시</div>
-          <div class="price-row num">
-            <span class="price-was">900,000원</span>
-            <span class="price-now">750,000<span class="won">원</span></span>
+          <div class="desc">신랑측과 신부측을 함께 응대하는 4인 2조 구성입니다. 하객 최대 400명(양가 합산) 기준입니다.</div>
+          <div class="savings-badge">🔥 최대 32만원 할인</div>
+          <div class="price-hero">
+            <div class="was-sm num">정상가 900,000원</div>
+            <div class="price-final"><span class="pf-label">최저</span><span class="pf-num num">580,000</span><span class="won">원</span><span class="pf-suffix">부터</span></div>
           </div>
-          <div class="price-steps">정상가 <span class="cut">900,000원</span><span class="arrow">→</span>양측 10만원 할인 <span class="cut">800,000원</span><span class="arrow">→</span>얼리버드 5만원 추가 <strong>750,000원</strong></div>
-          <div class="price-note" style="margin-top:0;">수도권 기준 · 3시간 내외 · 하객 최대 400명(양가 합산) 기준</div>
-          <ul>
-            <li>대표 부부 2인 모든 예식 직접 참석 · 현장 운영</li>
-            <li>축의대 운영 설정서를 기반으로 한 맞춤형 현장 운영</li>
-            <li>축의금 접수 · 기록 및 하객 응대</li>
-            <li>방명록 · 봉투 관리 및 축의금 · 식권 수량/금액 기록</li>
-            <li>계좌이체 하객 검증 후 식권 배부</li>
-            <li>실시간 축의금 현황 모니터링 시스템 제공 (모먼트웍스 전용)</li>
-            <li>실시간 촬영 카메라 1대 제공 · 영상 링크 공유 (한 측당)</li>
-            <li>PDF · 엑셀 축의금 내역서 제공 (요청 시 종이 출력물 제공)</li>
-            <li>예식 안내문 제작 및 비치 (한 측만 계약 시에도 양측 제작)</li>
-            <li>화환 사진 촬영 및 전달 (요청 시)</li>
-            <li>현금영수증 발행 (잔금 정산 후 계약금 + 잔금 기준)</li>
-          </ul>
+          <div class="discount-steps">
+            <div class="ds-row ds-base"><span class="ds-label">정상가</span><span class="ds-amt num">900,000원</span></div>
+            <div class="ds-row"><span class="ds-label">👫 양측 진행 할인</span><span class="ds-amt num minus">−120,000원</span></div>
+            <div class="ds-row"><span class="ds-label">🌅 얼리버드</span><span class="ds-amt num minus">−50,000원</span></div>
+            <div class="ds-subnote">📌 상담일 포함 5일 이내 계약 시</div>
+            <div class="ds-row"><span class="ds-label">🤝 짝꿍할인</span><span class="ds-amt num minus">−20,000원</span></div>
+            <div class="ds-subnote">📌 소개해 주신 분(기존 계약자)의 짝꿍코드 사용 시</div>
+            <div class="ds-row"><span class="ds-label">✍️ 계약 후기 (1건당 2만원, 최대 2건)</span><span class="ds-amt num minus">−40,000원</span></div>
+            <div class="ds-subnote">📌  본식 전날까지 작성 시 잔금에서 차감(블로그, 스레드, 카페 등)</div>
+            <div class="ds-row"><span class="ds-label">🎥 본식 후기 (1건당 2만원, 최대 2건)</span><span class="ds-amt num minus">−40,000원</span></div>
+            <div class="ds-subnote">📌 본식 종료 후 2개월 이내 작성 시 페이백(블로그, 스레드, 카페 등)</div>
+            <div class="ds-row"><span class="ds-label">👥 하객 합산 200인 이하</span><span class="ds-amt num minus">−50,000원</span></div>
+            <div class="ds-subnote">📌 본식 종료 후 잔금에서 차감</div>
+            <div class="ds-row ds-total"><span class="ds-label">최저 적용가</span><span class="ds-amt num">580,000원</span></div>
+          </div>
+          <div class="ds-note ds-note-featured">
+            <div class="ds-note-title">📌 짝꿍소개 할인 이벤트</div>
+            <div class="ds-note-body">짝꿍코드로 소개 시 소개해 주신 분에게 1건당 1만원 무제한 페이백(계약금액 한도 내)</div>
+            <div class="ds-note-body">→ 위 최저가에서 추가 할인까지 받을 수 있어요.</div>
+          </div>
         </div>
         <div class="card">
           <div class="kicker">Combined</div>
           <h4>신랑 · 신부 통합 패키지</h4>
-          <div class="desc">신랑측과 신부측 축의대를 한 곳으로 통합해 응대하는 구성입니다. 신랑측 1인, 신부측 1인이 각각 담당하는 1인 1조 구성입니다.</div>
-          <div class="price-tag">🌅 얼리버드 적용 시</div>
-          <div class="price-row num">
-            <span class="price-was">500,000원</span>
-            <span class="price-now">470,000<span class="won">원</span></span>
+          <div class="desc">신랑측과 신부측 축의대를 한 곳으로 통합해 응대하는 구성입니다. 하객 150명 기준입니다.</div>
+          <div class="savings-badge">🔥 최대 13만원 할인</div>
+          <div class="price-hero">
+            <div class="was-sm num">정상가 500,000원</div>
+            <div class="price-final"><span class="pf-label">최저</span><span class="pf-num num">370,000</span><span class="won">원</span><span class="pf-suffix">부터</span></div>
           </div>
-          <div class="price-note" style="margin-top:6px;">수도권 기준 · 3시간 내외 · 하객 150명 기준 · 정가 500,000원</div>
-          <ul>
-            <li>대표 부부 2인 모든 예식 직접 참석 · 현장 운영</li>
-            <li>축의대 운영 설정서를 기반으로 한 맞춤형 현장 운영</li>
-            <li>축의금 접수 · 기록 및 하객 응대</li>
-            <li>방명록 · 봉투 관리 및 축의금 · 식권 수량/금액 기록</li>
-            <li>계좌이체 하객 검증 후 식권 배부</li>
-            <li>실시간 축의금 현황 모니터링 시스템 제공 (모먼트웍스 전용)</li>
-            <li>실시간 촬영 카메라 1대 제공 · 영상 링크 공유 (한 측당)</li>
-            <li>PDF · 엑셀 축의금 내역서 제공 (요청 시 종이 출력물 제공)</li>
-            <li>예식 안내문 제작 및 비치 (한 측만 계약 시에도 양측 제작)</li>
-            <li>화환 사진 촬영 및 전달 (요청 시)</li>
-            <li>현금영수증 발행 (잔금 정산 후 계약금 + 잔금 기준)</li>
-          </ul>
+          <div class="discount-steps">
+            <div class="ds-row ds-base"><span class="ds-label">정상가</span><span class="ds-amt num">500,000원</span></div>
+            <div class="ds-row"><span class="ds-label">🌅 얼리버드</span><span class="ds-amt num minus">−30,000원</span></div>
+            <div class="ds-subnote">📌 상담일 포함 5일 이내 계약 시</div>
+            <div class="ds-row"><span class="ds-label">🤝 짝꿍할인</span><span class="ds-amt num minus">−20,000원</span></div>
+            <div class="ds-subnote">📌 소개해 주신 분(기존 계약자)의 짝꿍코드 사용 시</div>
+            <div class="ds-row"><span class="ds-label">✍️ 계약 후기 (1건당 2만원, 최대 2건)</span><span class="ds-amt num minus">−40,000원</span></div>
+            <div class="ds-subnote">📌  본식 전날까지 작성 시 잔금에서 차감(블로그, 스레드, 카페 등)</div>
+            <div class="ds-row"><span class="ds-label">🎥 본식 후기 (1건당 2만원, 최대 2건)</span><span class="ds-amt num minus">−40,000원</span></div>
+            <div class="ds-subnote">📌 본식 종료 후 2개월 이내 작성 시 페이백(블로그, 스레드, 카페 등)</div>
+            <div class="ds-row ds-total"><span class="ds-label">최저 적용가</span><span class="ds-amt num">370,000원</span></div>
+          </div>
+          <div class="ds-note ds-note-featured">
+            <div class="ds-note-title">📌 짝꿍소개 할인 이벤트</div>
+            <div class="ds-note-body">짝꿍코드로 소개 시 소개해 주신 분에게 1건당 1만원 무제한 페이백(계약금액 한도 내)</div>
+            <div class="ds-note-body">→ 위 최저가에서 추가 할인까지 받을 수 있어요.</div>
+          </div>
         </div>
+      </div>
+
+      <div class="line-group-label" style="margin-top:52px;">
+        <h3>패키지 서비스 안내</h3>
+        <span class="sub">모든 패키지에 동일하게 포함되는 서비스입니다</span>
+      </div>
+      <div class="service-card">
+        <ul>
+          <li>대표 부부 2인 모든 예식 직접 참석 · 현장 운영</li>
+          <li>축의대 운영 설정서를 기반으로 한 맞춤형 현장 운영</li>
+          <li>축의금 접수 · 기록 및 하객 응대</li>
+          <li>방명록 · 봉투 관리 및 축의금 · 식권 수량/금액 기록</li>
+          <li>계좌이체 하객 검증 후 식권 배부</li>
+          <li>실시간 축의금 현황 모니터링 시스템 제공 (모먼트웍스 전용)</li>
+          <li>실시간 촬영 카메라 1대 제공 · 영상 링크 공유 (한 측당)</li>
+          <li>PDF · 엑셀 축의금 내역서 제공 (요청 시 종이 출력물 제공)</li>
+          <li>예식 안내문 제작 및 비치 (한 측만 계약 시에도 양측 제작)</li>
+          <li>화환 사진 촬영 및 전달 (요청 시)</li>
+          <li>현금영수증 발행 (잔금 정산 후 계약금 + 잔금 기준)</li>
+        </ul>
       </div>
 
       <div class="promo" style="margin-top:8px;margin-bottom:14px;">
@@ -835,7 +915,7 @@
         </div>
 
         <div class="extra-total">
-          <div class="amount num">최대 16만원 상시 할인 !</div>
+          <div class="amount num">최대 20만원 추가 할인 !</div>
         </div>
 
         <div class="coupons">
@@ -867,7 +947,7 @@
           <div class="coupon">
             <div class="c-amount"><span class="c-icon">💵</span><span class="c-num num">2만원</span></div>
             <div>
-              <div class="c-title">계약 리뷰 이벤트</div>
+              <div class="c-title">계약 후기 이벤트</div>
               <div class="c-desc">계약 후 본식 1일 전까지 블로그 · 카페 · SNS 중 원하는 채널 1곳에 계약 후기를 남기면 2만원이 할인됩니다.</div>
               <span class="c-cap">1건만 작성해도 2만원 할인</span>
             </div>
@@ -875,7 +955,7 @@
           <div class="coupon">
             <div class="c-amount"><span class="c-icon">💵</span><span class="c-num num">2만원</span></div>
             <div>
-              <div class="c-title">본식 리뷰 이벤트</div>
+              <div class="c-title">본식 후기 이벤트</div>
               <div class="c-desc">본식 진행 후 2개월 이내에 블로그 · 카페 · SNS 중 원하는 채널 1곳에 후기를 남기면 2만원이 할인됩니다.</div>
               <span class="c-cap">1건만 작성해도 2만원 할인</span>
             </div>
