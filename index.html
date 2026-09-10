@@ -610,7 +610,7 @@
     .nav-icon-btn svg{width:15px;height:15px;}
 
     .announce .wrap{padding:12px 20px;}
-    .announce p{font-size:12.5px;line-height:1.75;letter-spacing:0;}
+    .announce p{font-size:12px;line-height:1.75;letter-spacing:-0.015em;}
     .announce a{font-size:11.5px;padding:5px 12px;}
 
     .hero{padding:56px 0 48px;}
@@ -663,6 +663,53 @@
     .footer-cta p{font-size:13px;}
     .footer-bottom{flex-direction:column;text-align:center;gap:6px;}
     .consult-form{margin-top:28px;}
+
+    /* ===== MOBILE: newer components (pricing cascade / savings badge / service list / availability modal) ===== */
+    .savings-badge{font-size:11px;letter-spacing:-0.01em;padding:4px 10px;white-space:nowrap;}
+    .price-hero .was-sm{font-size:12px;letter-spacing:-0.01em;}
+    .price-final{gap:3px;}
+    .price-final .pf-label{font-size:12px;}
+    .price-final .pf-num{font-size:27px;letter-spacing:-0.01em;}
+    .price-final .won{font-size:14px;}
+    .price-final .pf-suffix{font-size:12px;}
+
+    .discount-steps{margin-top:14px;padding-top:11px;}
+    .ds-row{font-size:11.5px;letter-spacing:-0.02em;padding:4px 0;gap:6px;}
+    .ds-row .ds-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .ds-row .ds-amt{white-space:nowrap;flex-shrink:0;}
+    .ds-row.ds-base{font-size:12px;letter-spacing:-0.01em;}
+    .ds-row.ds-total{font-size:13px;letter-spacing:-0.01em;}
+    .ds-note, .ds-subnote{font-size:10.5px;letter-spacing:-0.01em;padding:6px 9px;}
+    .ds-note-featured .ds-note-title{font-size:12px;}
+    .ds-note-featured .ds-note-body{font-size:11px;letter-spacing:-0.01em;}
+
+    .service-card{padding:22px 20px;margin-bottom:32px;}
+    .service-card li{font-size:12.5px;letter-spacing:-0.005em;padding:6px 0 6px 16px;}
+
+    .coupon{padding:18px 16px;}
+    .c-title{font-size:14px;}
+    .c-cap{font-size:10.5px;letter-spacing:-0.01em;}
+    .c-num{font-size:17px;}
+    .c-badge, .m-badge{font-size:10.5px;letter-spacing:-0.005em;padding:4px 10px;}
+    .extra-total .amount{font-size:19px;letter-spacing:-0.01em;}
+
+    .avail-modal{padding:24px 16px 20px;margin:24px auto;max-width:100%;}
+    .avail-modal-head h3{font-size:18px;}
+    .avail-nav{gap:14px;margin-bottom:14px;}
+    .avail-month-label{font-size:15px;min-width:80px;}
+    .avail-cal-weekdays span{font-size:10px;padding:4px 0;}
+    .avail-cal-grid{gap:3px;}
+    .avail-cell{min-height:58px;padding:4px 2px;font-size:9px;}
+    .avail-cell .d-num{font-size:11px;}
+    .avail-cell .d-holi{font-size:7px;}
+    .avail-cell .d-half{font-size:7.5px;letter-spacing:-0.02em;gap:2px;margin-top:2px;}
+    .avail-legend{gap:10px;font-size:10px;}
+
+    .faq-item{padding:18px 0;}
+    .faq-item .q{font-size:13.5px;letter-spacing:-0.005em;}
+    .faq-item .a{font-size:12.5px;padding-left:18px;}
+
+    .savings-badge, .promo-tag, .kicker, .tag{letter-spacing:-0.01em;}
   }
 </style>
 </head>
@@ -794,9 +841,10 @@
             <div class="ds-row ds-total"><span class="ds-label">최저 적용가</span><span class="ds-amt num">290,000원</span></div>
           </div>
           <div class="ds-note ds-note-featured">
-            <div class="ds-note-title">📌 짝꿍소개 할인 이벤트</div>
-            <div class="ds-note-body">짝꿍코드로 소개 시 소개해 주신 분에게 1건당 1만원 무제한 페이백(계약금액 한도 내)</div>
-            <div class="ds-note-body">→ 위 최저가에서 추가 할인까지 받을 수 있어요.</div>
+            <div class="ds-note-title">📌 짝꿍소개 페이백 이벤트(무제한)</div>
+            <div class="ds-note-body">모먼트웍스를 소개하여 계약이 진행되면 소개 받으신 분의 본식 50일 전에</div>
+            <div class="ds-note-body">1건당 1만원 무제한 페이백!(짝꿍코드 활용 / 계약금액 한도 내)</div>
+            <div class="ds-note-body">🔥 최저 적용가에서 추가 할인까지 받을 수 있어요.</div>
           </div>
         </div>
         <div class="card premium">
@@ -824,9 +872,10 @@
             <div class="ds-row ds-total"><span class="ds-label">최저 적용가</span><span class="ds-amt num">580,000원</span></div>
           </div>
           <div class="ds-note ds-note-featured">
-            <div class="ds-note-title">📌 짝꿍소개 할인 이벤트</div>
-            <div class="ds-note-body">짝꿍코드로 소개 시 소개해 주신 분에게 1건당 1만원 무제한 페이백(계약금액 한도 내)</div>
-            <div class="ds-note-body">→ 위 최저가에서 추가 할인까지 받을 수 있어요.</div>
+            <div class="ds-note-title">📌 짝꿍소개 페이백 이벤트(무제한)</div>
+            <div class="ds-note-body">모먼트웍스를 소개하여 계약이 진행되면 소개 받으신 분의 본식 50일 전에</div>
+            <div class="ds-note-body">1건당 1만원 무제한 페이백!(짝꿍코드 활용 / 계약금액 한도 내)</div>
+            <div class="ds-note-body">🔥 최저 적용가에서 추가 할인까지 받을 수 있어요.</div>
           </div>
         </div>
         <div class="card">
@@ -851,9 +900,10 @@
             <div class="ds-row ds-total"><span class="ds-label">최저 적용가</span><span class="ds-amt num">370,000원</span></div>
           </div>
           <div class="ds-note ds-note-featured">
-            <div class="ds-note-title">📌 짝꿍소개 할인 이벤트</div>
-            <div class="ds-note-body">짝꿍코드로 소개 시 소개해 주신 분에게 1건당 1만원 무제한 페이백(계약금액 한도 내)</div>
-            <div class="ds-note-body">→ 위 최저가에서 추가 할인까지 받을 수 있어요.</div>
+            <div class="ds-note-title">📌 짝꿍소개 페이백 이벤트(무제한)</div>
+            <div class="ds-note-body">모먼트웍스를 소개하여 계약이 진행되면 소개 받으신 분의 본식 50일 전에</div>
+            <div class="ds-note-body">1건당 1만원 무제한 페이백!(짝꿍코드 활용 / 계약금액 한도 내)</div>
+            <div class="ds-note-body">🔥 최저 적용가에서 추가 할인까지 받을 수 있어요.</div>
           </div>
         </div>
       </div>
