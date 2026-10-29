@@ -555,6 +555,60 @@
   .promo .promo-desc{font-size:13px;color:var(--muted);line-height:1.6;}
   .promo .promo-desc strong{color:var(--wine);font-weight:700;}
 
+
+  /* ===== TICKET SERVICE ===== */
+  .ticket-svc{
+    margin-top:28px;margin-bottom:14px;background:var(--ink);color:var(--off-white);
+    border:1px solid var(--gold);border-radius:6px;padding:38px 34px 32px;position:relative;overflow:hidden;
+  }
+  .ticket-svc::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 520px 260px at 95% 0%, rgba(184,146,90,0.20), transparent 60%);pointer-events:none;}
+  .ticket-svc > *{position:relative;}
+  .ticket-head{display:flex;align-items:center;gap:20px;margin-bottom:26px;}
+  .ticket-head .promo-icon{
+    flex-shrink:0;width:64px;height:64px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, var(--gold-light), var(--gold));
+    display:flex;align-items:center;justify-content:center;font-size:30px;
+  }
+  .ticket-tag{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-light);font-weight:700;display:block;margin-bottom:4px;}
+  .ticket-title{font-family:'Noto Serif KR',serif;font-size:23px;font-weight:700;margin-bottom:4px;}
+  .ticket-sub{font-size:13px;color:var(--muted-dark);line-height:1.6;}
+  .ticket-prices{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:24px;}
+  .ticket-price{
+    border:1px solid var(--panel-line);border-radius:6px;padding:24px 22px;background:var(--panel);
+    display:flex;flex-direction:column;
+  }
+  .ticket-price.alt{border-color:var(--gold);background:linear-gradient(145deg, #231D1A, #2A1C20);}
+  .ticket-price .tp-name{font-family:'Noto Serif KR',serif;font-weight:700;font-size:16px;margin-bottom:2px;}
+  .ticket-price .tp-desc{font-size:12.5px;color:var(--gold-light);margin-bottom:16px;}
+  .tp-tiers{display:flex;flex-direction:column;}
+  .tp-tier{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-top:1px dashed #3A3D44;}
+  .tp-tier:first-child{border-top:none;}
+  .tp-tier .q{font-size:14px;color:#DCD5C8;font-weight:600;}
+  .tp-tier .a{font-size:21px;font-weight:700;color:var(--gold-light);}
+  .tp-tier .a .won{font-size:13px;font-weight:500;margin-left:2px;color:#C9C2B5;}
+  .tp-note{
+    margin-top:14px;font-size:12.5px;line-height:1.6;color:#F0C4CA;font-weight:600;
+    background:rgba(110,36,48,0.35);border-radius:4px;padding:10px 12px;
+  }
+  .tp-example{
+    margin-top:14px;font-size:12.5px;line-height:1.7;color:#C9C2B5;
+    background:rgba(184,146,90,0.10);border-radius:4px;padding:10px 12px;
+  }
+  .tp-example b{color:var(--gold-light);font-weight:700;}
+  .ticket-svc ul{list-style:none;border-top:1px solid var(--panel-line);padding-top:18px;}
+  .ticket-svc ul li{font-size:13.5px;padding:6px 0;padding-left:18px;position:relative;color:#DCD5C8;font-weight:600;}
+  .ticket-svc ul li::before{content:'—';position:absolute;left:0;color:var(--gold);}
+  @media(max-width:720px){
+    .ticket-prices{grid-template-columns:1fr;}
+  }
+  @media(max-width:640px){
+    .ticket-svc{padding:28px 18px 24px;}
+    .ticket-head{flex-direction:column;text-align:center;}
+    .ticket-title{font-size:19px;}
+    .tp-tier .a{font-size:19px;}
+    .ticket-svc ul li{font-size:12.5px;letter-spacing:-0.01em;}
+  }
+
   /* ===== PAYMENT METHODS ===== */
   .payment{
     background:var(--panel);
@@ -925,9 +979,46 @@
           <li>실시간 축의금 현황 모니터링 시스템 제공 (모먼트웍스 전용)</li>
           <li>실시간 촬영 카메라 1대 제공 · 영상 링크 공유 (한 측당)</li>
           <li>PDF · 엑셀 축의금 보고서 제공</li>
-          <li>예식 안내문 제작 및 비치 (한 측만 계약 시에도 양측 제작)</li>
+          <li>예식 안내문 제작 및 이미지 제공(한 측만 계약 시에도 양측 제작)</li>
           <li>화환 사진 촬영 및 전달 (요청 시)</li>
           <li>현금영수증 발행 (잔금 정산 후 계약금 + 잔금 기준)</li>
+        </ul>
+      </div>
+
+      <div class="ticket-svc">
+        <div class="ticket-head">
+          <span class="promo-icon">🎫</span>
+          <div>
+            <span class="ticket-tag">Meal Ticket Service</span>
+            <div class="ticket-title">식권 제작 서비스</div>
+            <div class="ticket-sub">원하는 디자인으로 커스텀 제작하거나, 모먼트웍스 기본 식권으로 바로 제작할 수 있습니다.</div>
+          </div>
+        </div>
+        <div class="ticket-prices">
+          <div class="ticket-price">
+            <div class="tp-name">✏️ 커스텀 디자인 식권</div>
+            <div class="tp-desc">원하시는 디자인으로 제작</div>
+            <div class="tp-tiers">
+              <div class="tp-tier"><span class="q">200장</span><span class="a num">19,900<span class="won">원</span></span></div>
+              <div class="tp-tier"><span class="q">500장</span><span class="a num">39,900<span class="won">원</span></span></div>
+            </div>
+            <div class="tp-note">🎨 500장 제작 시 신랑 · 신부가 나눠서 사용하는 경우, 각각 다른 색의 도장과 넘버링 서비스를 제공해 드립니다.</div>
+          </div>
+          <div class="ticket-price alt">
+            <div class="tp-name">🎟️ 모먼트웍스 기본 식권</div>
+            <div class="tp-desc">모먼트웍스 기본 식권 디자인</div>
+            <div class="tp-tiers">
+              <div class="tp-tier"><span class="q">20장</span><span class="a num">2,000<span class="won">원</span></span></div>
+              <div class="tp-tier"><span class="q">50장</span><span class="a num">4,000<span class="won">원</span></span></div>
+              <div class="tp-tier"><span class="q">100장</span><span class="a num">7,000<span class="won">원</span></span></div>
+            </div>
+            <div class="tp-example">💡 <b>수량 조합 예시</b><br>120장 <b>9,000원</b> · 150장 <b>11,000원</b> · 200장 <b>14,000원</b></div>
+          </div>
+        </div>
+        <ul>
+          <li>예식 당일 모먼트웍스가 식권을 지참하므로 별도의 식권 인계 절차 없이 축의대 업무 진행</li>
+          <li>한 측만 계약 시에도 양측(신랑측/신부측) 식권 주문 가능</li>
+          <li>식권 제작 서비스 이용 시 확인도장 및 넘버링 서비스 무료 제공</li>
         </ul>
       </div>
 
